@@ -1,5 +1,6 @@
 package com.diptam.client;
 
+import com.diptam.kafka.Producer;
 import com.diptam.util.ApplicationProperties;
 import com.google.common.collect.Lists;
 import com.twitter.hbc.ClientBuilder;
@@ -12,6 +13,8 @@ import com.twitter.hbc.core.processor.StringDelimitedProcessor;
 import com.twitter.hbc.httpclient.auth.Authentication;
 import com.twitter.hbc.httpclient.auth.OAuth1;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +32,7 @@ public class TwitterClient {
 
         Hosts twitterHosts = new HttpHosts(Constants.STREAM_HOST);
         StatusesFilterEndpoint twitterEndpoint = new StatusesFilterEndpoint();
-        List<String> terms = Lists.newArrayList("#COVID19");
+        List<String> terms = Lists.newArrayList("#AssassinsCreedValhalla");
         twitterEndpoint.trackTerms(terms);
 
         ClientBuilder builder = new ClientBuilder()
@@ -54,19 +57,23 @@ public class TwitterClient {
         BlockingQueue<String> msgQueue = new LinkedBlockingQueue<String>(1000);
         Client twitterClient = createTwitterClient(msgQueue);
         Optional<String> msg = Optional.empty();
+        KafkaProducer<String, String> twitterProducer = Producer.createKafkaProducer();
         try {
             twitterClient.connect();
 
             while (!twitterClient.isDone()) {
-               msg = Optional.ofNullable(msgQueue.poll(5, TimeUnit.SECONDS));
+                log.info("Polling Message -->");
+               msg = Optional.ofNullable(msgQueue.poll(2, TimeUnit.SECONDS));
                if(msg.isPresent()){
-                   log.info(msg.get());
+                   log.info("Sending Message : "+msg.get());
+                   Producer.sendMessage(twitterProducer, Producer.createProducerRecord(msg.get()));
                }
             }
         } catch (InterruptedException e) {
             log.error("Error Occurred : ",e);
             twitterClient.stop();
         } finally {
+            twitterProducer.close();
             twitterClient.stop();
         }
     }

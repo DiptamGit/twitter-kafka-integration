@@ -29,7 +29,7 @@ public class Producer {
         return record;
     }
 
-    private static void sendMessage(KafkaProducer<String, String> producer, final ProducerRecord record) {
+    public static void sendMessage(KafkaProducer<String, String> producer, final ProducerRecord record) {
         producer.send(record, new Callback() {
             @Override
             public void onCompletion(RecordMetadata recordMetadata, Exception e) {
@@ -52,6 +52,7 @@ public class Producer {
         properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVER);
         properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.setProperty(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, Boolean.TRUE.toString());
 
         return properties;
     }

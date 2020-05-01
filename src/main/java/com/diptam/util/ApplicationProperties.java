@@ -22,10 +22,6 @@ public class ApplicationProperties {
     @Getter @Setter
     private String apiSecretKey;
 
-    public static void main(String[] args) {
-        ApplicationProperties.loadProperties();
-    }
-
     public static ApplicationProperties loadProperties(){
         Properties properties = new Properties();
         ApplicationProperties applicationProperties = new ApplicationProperties();
