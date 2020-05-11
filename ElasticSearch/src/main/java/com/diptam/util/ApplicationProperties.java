@@ -3,7 +3,9 @@ package com.diptam.util;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -12,7 +14,7 @@ import java.util.Properties;
 public class ApplicationProperties {
 
     private static HashMap<String,String> applicationPropertiesCache = new HashMap<>();
-    private static final String propertyFile = "src/main/resources/application.properties";
+    private static final String propertyFile = "ElasticSearch/src/main/resources/application.properties";
 
     public static HashMap<String, String> getProperties(){
         if (applicationPropertiesCache.isEmpty()){
@@ -25,11 +27,7 @@ public class ApplicationProperties {
         Properties properties = new Properties();
         try(InputStream input = new FileInputStream(propertyFile)) {
             properties.load(input);
-            properties.keySet().forEach(key -> {
-                applicationPropertiesCache.put(key.toString(), properties.getProperty(key.toString()));
-            });
-        } catch (FileNotFoundException e) {
-            log.debug("Error Occurred", e);
+            properties.keySet().forEach(key -> applicationPropertiesCache.put(key.toString(), properties.getProperty(key.toString())));
         } catch (IOException e) {
             log.debug("Error Occurred", e);
         }

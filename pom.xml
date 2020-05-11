@@ -9,7 +9,8 @@
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <modules>
-    <module>ElasticSearchConsumer</module>
+      <module>ElasticSearch</module>
+    <module>Twitter</module>
   </modules>
 
 
@@ -26,17 +27,7 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
-    <dependency>
-      <groupId>org.apache.kafka</groupId>
-      <artifactId>kafka-clients</artifactId>
-      <version>2.3.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.twitter</groupId>
-      <artifactId>hbc-core</artifactId> <!-- or hbc-twitter4j -->
-      <version>2.2.0</version> <!-- or whatever the latest version is -->
-    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -55,11 +46,7 @@
       <version>1.18.12</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>org.elasticsearch.client</groupId>
-      <artifactId>elasticsearch-rest-high-level-client</artifactId>
-      <version>7.6.2</version>
-    </dependency>
+
   </dependencies>
 
   <build>
