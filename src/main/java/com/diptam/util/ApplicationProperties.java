@@ -12,9 +12,7 @@ import java.util.Properties;
 public class ApplicationProperties {
 
     private static HashMap<String,String> applicationPropertiesCache = new HashMap<>();
-
-    private static final String propertyFile = "application.properties";
-
+    private static final String propertyFile = "src/main/resources/application.properties";
 
     public static HashMap<String, String> getProperties(){
         if (applicationPropertiesCache.isEmpty()){
@@ -25,8 +23,7 @@ public class ApplicationProperties {
 
     private static void loadProperties(){
         Properties properties = new Properties();
-        String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-        try(InputStream input = new FileInputStream(rootPath+"/"+propertyFile)) {
+        try(InputStream input = new FileInputStream(propertyFile)) {
             properties.load(input);
             properties.keySet().forEach(key -> {
                 applicationPropertiesCache.put(key.toString(), properties.getProperty(key.toString()));
@@ -36,5 +33,6 @@ public class ApplicationProperties {
         } catch (IOException e) {
             log.debug("Error Occurred", e);
         }
+        System.out.println(applicationPropertiesCache);
     }
 }
