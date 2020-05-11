@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.BlockingQueue;
@@ -48,9 +49,9 @@ public class TwitterClient {
     }
 
     private static Authentication getAuthentication(){
-        ApplicationProperties properties = ApplicationProperties.loadProperties();
+        final HashMap<String, String> properties = ApplicationProperties.getProperties();
         log.info("App Properties : "+properties);
-        return new OAuth1(properties.getApiKey(), properties.getApiSecretKey(),properties.getAccessToken(), properties.getAccessTokenSecret());
+        return new OAuth1(properties.get("twitterApiKey"), properties.get("twitterApiSecretKey"),properties.get("twitterAccessToken"), properties.get("twitterAccessTokenSecret"));
     }
 
     public static void main(String[] args) {
