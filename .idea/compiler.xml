@@ -7,8 +7,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ElasticSearch" />
-        <module name="Twitter" />
+        <module name="twitter" />
+        <module name="elastic-search" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

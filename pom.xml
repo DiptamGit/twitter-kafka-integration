@@ -9,8 +9,8 @@
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <modules>
-      <module>ElasticSearch</module>
-    <module>Twitter</module>
+      <module>elastic-search</module>
+      <module>twitter</module>
   </modules>
 
 
