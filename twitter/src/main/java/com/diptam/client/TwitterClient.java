@@ -33,7 +33,7 @@ public class TwitterClient {
 
         Hosts twitterHosts = new HttpHosts(Constants.STREAM_HOST);
         StatusesFilterEndpoint twitterEndpoint = new StatusesFilterEndpoint();
-        List<String> terms = Lists.newArrayList("#AssassinsCreedValhalla");
+        List<String> terms = Lists.newArrayList("#StateFarm", "#statefarm", "@StateFarm");
         twitterEndpoint.trackTerms(terms);
 
         ClientBuilder builder = new ClientBuilder()
