@@ -11,12 +11,18 @@ import java.util.Properties;
 @Slf4j
 public class Consumer {
 
+    private KafkaConsumer<String, String> consumer;
+
     final static String BOOTSTRAP_SERVER = "localhost:9092";
     final static String TOPIC = "tweets";
     final static String GROUP_ID = "kafka-consumer-tweets-elasticsearch";
     final static String OFFSET_TYPE = "earliest"; //latest - earliest - none
 
-    public static KafkaConsumer<String, String> getConsumer() {
+    public Consumer() {
+        this.consumer = createConsumer();
+    }
+
+    private static KafkaConsumer<String, String> createConsumer() {
 
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(createKafkaConsumerProperties());
         consumer.subscribe(Collections.singletonList(TOPIC));
@@ -36,4 +42,7 @@ public class Consumer {
         return properties;
     }
 
+    public KafkaConsumer<String, String> getConsumer() {
+        return consumer;
+    }
 }
