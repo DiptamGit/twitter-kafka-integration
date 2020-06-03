@@ -8,11 +8,17 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="twitter" />
+        <module name="query-client" />
         <module name="elastic-search" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="ElasticSearchConsumer" target="8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="query-client" options="-parameters" />
+    </option>
   </component>
 </project>
