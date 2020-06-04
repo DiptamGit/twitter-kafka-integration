@@ -8,8 +8,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="twitter" />
-        <module name="query-client" />
         <module name="elastic-search" />
+        <module name="query-client" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
