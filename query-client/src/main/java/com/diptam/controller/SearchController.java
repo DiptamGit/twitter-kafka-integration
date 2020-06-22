@@ -1,4 +1,4 @@
-package com.diptam.client;
+package com.diptam.controller;
 
 import com.diptam.model.ElasticSearchResponse;
 import com.diptam.search.ElasticSearchClientBuilder;
@@ -10,7 +10,6 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.MatchQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.http.MediaType;
@@ -25,7 +24,7 @@ import java.util.Optional;
 
 @RestController
 @Slf4j
-public class SearchClient {
+public class SearchController {
 
     private static final String INDEX = "tweets";
 
